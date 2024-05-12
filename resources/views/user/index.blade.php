@@ -30,7 +30,7 @@
         <div class="alert alert-warning alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <i class="fas fa-check-circle"></i>  <strong>Sukses!</strong>  {{ session('success') }}.
-                  </div>
+        </div>
 
                 @endif
 
@@ -44,7 +44,7 @@
 
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <i class="fas fa-times"></i>  <strong>Gagal ditambahkan!</strong> 
+                    <i class="fas fa-times"></i>  <strong>Gagal ditambahkan!</strong>
                     <ul>
                     @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -69,7 +69,6 @@
         </div>
         <div class="card-body bg-dark">
 
-
             <table id="dataTable" class="table table-bordered text-white" cellspacing="1"><br/>
                 <thead>
                     <tr align="center">
@@ -77,7 +76,7 @@
                         <th style="width: 20%">Nama User</th>
                         <th style="width: 20%">Email</th>
                         <th style="width: 15%">Role</th>
-                        <th style="width: 20%">Aksi</th>
+                        <th style="width: 30%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,11 +88,11 @@
                         <td>{{ $userItem->role }}</td>
                         <td>
                             <a href="{{ route('user.edit', $userItem->id) }}" class="btn btn-sm btn-info">
-                                <i class="fas fa-edit"></i> Edit
+                                <i class="far fa-edit"></i> Edit
                             </a>
                             <!-- Tombol Hapus -->
                             <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#confirmDeleteModal{{ $userItem->id }}">
-                                <i class="fas fa-trash"></i> Hapus
+                                <i class="far fa-trash-alt"></i> Hapus
                             </button>
                         </td>
                     </tr>
@@ -125,7 +124,7 @@
 
 
 
-                    <!-- Modal Tambah User -->
+<!-- Modal Tambah User -->
 <div class="modal fade text-dark" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
     <!-- Isi Modal Tambah User -->
     <div class="modal-dialog" role="document">

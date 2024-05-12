@@ -32,16 +32,16 @@ function confirmDelete() {
                 "sProcessing": "Sedang memproses...",
                 "sLengthMenu": "Tampilkan _MENU_ ",
                 "sZeroRecords": "Tidak ditemukan data yang sesuai",
-                "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-                "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
-                "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                "sInfo": "Memuat _START_ sampai _END_ dari total _TOTAL_ data",
+                "sInfoEmpty": "Memuat 0 sampai 0 dari 0 data",
+                "sInfoFiltered": "(disaring dari _MAX_ data keseluruhan)",
                 "sInfoPostFix": "",
                 "sSearch": "Cari:",
                 "sUrl": "",
                 "oPaginate": {
                     "sFirst": "Pertama",
-                    "sPrevious": "Sebelumnya",
-                    "sNext": "Selanjutnya",
+                    "sPrevious": "<<",
+                    "sNext": ">>",
                     "sLast": "Terakhir"
                 },
                 "oAria": {

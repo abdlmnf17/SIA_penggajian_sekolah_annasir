@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -16,6 +17,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
         $user = User::all();
@@ -31,6 +39,8 @@ class UserController extends Controller
     {
 
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -85,8 +95,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        $user = User::findOrFail($id);
+        return view ('user.edit', compact('user'));
+     }
 
     /**
      * Update the specified resource in storage.
@@ -95,10 +106,45 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+
+     public function update(Request $request, $id)
+{
+    $user = User::findOrFail($id);
+    $validatedData = $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255'],
+        'password' => ['nullable', 'string', 'min:8', 'confirmed'], // Hapus validasi 'unique:users'
+        'role' => ['nullable', 'string', Rule::in(['admin', 'user'])],
+    ]);
+
+    // Periksa apakah pengguna ingin mengubah kata sandi
+    if (!empty($validatedData['password'])) {
+        // Jika pengguna ingin mengubah kata sandi, hash kata sandi baru
+        $hashedPassword = Hash::make($validatedData['password']);
+    } else {
+        // Jika tidak, gunakan kata sandi yang sudah ada di database
+        $hashedPassword = $user->password;
     }
+
+    // Update data pengguna
+    $user->update([
+        'name' => $validatedData['name'],
+        'email' => $validatedData['email'],
+        'password' => $hashedPassword,
+        'role' => $request->role,
+    ]);
+
+    // Periksa role pengguna yang sedang login
+    $userRole = Auth::user()->role;
+
+    // Redirect sesuai role pengguna yang sedang login
+    if ($userRole === 'admin') {
+        return redirect()->route('user.index')->with('success', 'Data user berhasil diperbarui.');
+    } else {
+        return redirect()->route('dashboard')->with('success', 'Data user berhasil diperbarui.');
+    }
+}
+
 
     /**
      * Remove the specified resource from storage.

@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="bg-gradient-dark">
+<body class="bg-dark">
 
 <div class="container">
     <br/>
@@ -31,17 +31,17 @@
     <div class="row justify-content-center ">
         <div class="col-md-6">
            <br/>
-            <div class="card text-white">
-                <div class="card-header bg-dark">{{ __('Login') }}</div>
-                <div class="card-body  bg-dark">
+            <div class="card text-dark">
+                <div class="card-header text-dark">{{ __('Login') }}</div>
+                <div class="card-body text-dark">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Alamat Email') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -55,7 +55,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -71,7 +71,7 @@
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                        {{ __('Ingatkan saya') }}
                                     </label>
                                 </div>
                             </div>
@@ -84,8 +84,8 @@
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link  text-white" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                    <a class="btn btn-link  text-dark" href="{{ route('password.request') }}">
+                                        {{ __('Lupa Password?') }}
                                     </a>
                                 @endif
                             </div>

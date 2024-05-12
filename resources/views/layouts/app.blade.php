@@ -35,7 +35,7 @@
         <ul class="navbar-nav bg-dark-mode sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
 
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-comments-dollar"></i>
@@ -51,8 +51,8 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="/home">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                <a class="nav-link" href="/dashboard">
+                    <i class="fas fa-chart-line"></i>
                     <span>Dashboard</span></a>
             </li>
 
@@ -68,19 +68,27 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fas fa-chalkboard-teacher"></i>
                     <span>Data Master</span>
 
                 </a>
+                @php
+                    $role = auth()->user()->role;
+                    @endphp
+
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Data Master</h6>
+                        @if($role === 'admin')
+                        <a class="collapse-item" href="/user">User</a>
+                        @endif
+                        <a class="collapse-item" href="/karyawan">Karyawan</a>
+                        <a class="collapse-item" href="/tunjangan">Potongan</a>
+                        <a class="collapse-item" href="/potongan">Tunjangan</a>
+                        @if($role === 'admin')
 
-                        <a class="collapse-item" href="/user">Data User</a>
-
-                        <a class="collapse-item" href="/guru">Data Guru</a>
-                        <a class="collapse-item" href="/tunjangan">Data Tunjangan</a>
-                        <a class="collapse-item" href="/potongan">Data Potongan</a>
+                        <a class="collapse-item" href="/akun">Data Akun</a>
+                        @endif
                     </div>
                 </div>
             </li>
@@ -89,7 +97,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-money-bill-wave-alt"></i>
                     <span>Data Transaksi</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -364,22 +372,22 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/user/{{ Auth::user()->id }}/edit">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    Edit Profile
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                {{-- <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
+                                    Activity Log --}}
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Keluar
                                 </a>
                             </div>
                         </li>
