@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-lg-10 mb-10 mx-auto ">
+    <div class="col-lg-9 mb-10 mx-auto ">
         <!-- Menampilkan pesan kesuksesan -->
         @if (session('success'))
             <div class="alert alert-warning alert-dismissible">
@@ -62,13 +62,17 @@
                                 <td>{{ $userItem->bidang_studi }}</td>
                                 <td>{{ $userItem->jabatan }}</td>
                                 <td>
-                                    <a href="{{ route('karyawan.edit', $userItem->id) }}" class="btn btn-sm btn-info">
-                                        <i class="far fa-edit"></i> Edit
+                                    <a href="{{ route('karyawan.show', $userItem->id) }}" class="btn btn-sm btn-primary">
+                                        <i class="far fa-id-card"></i>
                                     </a>
+                                    <a href="{{ route('karyawan.edit', $userItem->id) }}" class="btn btn-sm btn-info">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+
                                     <!-- Tombol Hapus -->
                                     <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
                                         data-target="#confirmDeleteModal{{ $userItem->id }}">
-                                        <i class="far fa-trash-alt"></i> Hapus
+                                        <i class="far fa-trash-alt"></i>
                                     </button>
                                 </td>
                             </tr>

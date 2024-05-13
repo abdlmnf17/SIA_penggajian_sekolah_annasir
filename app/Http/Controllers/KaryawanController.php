@@ -74,7 +74,7 @@ class KaryawanController extends Controller
         $profilePhotoPath = null;
         if ($request->hasFile('profile_photo')) {
             $profilePhoto = $request->file('profile_photo');
-            $namaFile = Str::slug($request->nama).'_'.uniqid().'.'.$profilePhoto->getClientOriginalExtension();
+            $namaFile = Str::slug($request->nama) . '_' . uniqid() . '.' . $profilePhoto->getClientOriginalExtension();
 
             $profilePhotoPath = $profilePhoto->storeAs('profile-photos', $namaFile, 'public');
         }
@@ -101,7 +101,8 @@ class KaryawanController extends Controller
      */
     public function show($id)
     {
-        //
+        $karyawan = Karyawan::findOrFail($id);
+        return view('karyawan.show', compact('karyawan'));
     }
 
     /**
@@ -112,7 +113,8 @@ class KaryawanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $karyawan = Karyawan::findOrFail($id);
+        return view('karyawan.edit', compact('karyawan'));
     }
 
     /**
@@ -123,7 +125,63 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'nik' => 'nullable|string|max:255',
+            'jabatan' => 'required|string|max:255',
+            'no_telepon' => 'required|string|max:225',
+            'studi' => 'required|string|max:225',
+            'tgs' => 'required|string|max:225',
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'ttl' => 'required|date',
+        ]);
+
+        $karyawan = Karyawan::findOrFail($id);
+
+        if ($request->hasFile('profile_photo')) {
+
+            if ($karyawan->photo) {
+                Storage::disk('public')->delete($karyawan->profile_photo);
+            }
+            $profilePhoto = $request->file('profile_photo');
+            $namaFile = Str::slug($request->nama) . '_' . uniqid() . '.' . $profilePhoto->getClientOriginalExtension();
+            $profilePhotoPath = $profilePhoto->storeAs('profile-photos', $namaFile, 'public'); // Menyimpan foto ke
+            $karyawan->photo = $profilePhotoPath;
+        }
+
+
+
+        $updateData = [
+            'nama_karyawan' => $request->nama,
+            'jabatan' => $request->jabatan,
+            'tugas_tambahan' => $request->tgs,
+            'bidang_studi' => $request->studi,
+            'no_telepon' => $request->no_telepon,
+            'tanggal_lahir' => $request->ttl,
+
+        ];
+
+        if (! empty($request['nik'])) {
+            // Jika pengguna ingin mengubah nik
+            $updateData['nik'] = $request->nik;
+        } else {
+            // Jika tidak, gunakan yang sudah ada di database
+            $updateData['nik'] = $karyawan->nik;
+            // $nikBaru = $karyawan->nik;
+        }
+
+        // // Periksa apakah input nik kosong
+        // if ($request->has('nik')) {
+        //     // Jika tidak kosong, gunakan nilai baru
+        //     $updateData['nik'] = $request->nik;
+        // }
+
+
+
+        $karyawan->update($updateData);
+
+        return redirect()->route('karyawan.index')->with('success', 'Data karyawan berhasil diperbarui!');
+
     }
 
     /**
