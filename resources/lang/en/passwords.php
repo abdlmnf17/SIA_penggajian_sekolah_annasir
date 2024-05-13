@@ -17,6 +17,6 @@ return [
     'sent' => 'Kami sudah mengirimkan link ke email Anda!',
     'throttled' => 'Tunggu beberapa saat.',
     'token' => 'Token tidak valid.',
-    'user' => "Kami tidak bisa menemukan email Anda",
+    'user' => 'Kami tidak bisa menemukan email Anda',
 
 ];

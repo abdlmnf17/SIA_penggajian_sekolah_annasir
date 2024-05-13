@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Karyawan;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class KaryawanController extends Controller
 {
@@ -15,18 +14,16 @@ class KaryawanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-     public function __construct()
-     {
-         $this->middleware('auth');
-     }
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
         $karyawan = Karyawan::all();
-        return view ('karyawan.index', compact('karyawan'));
 
+        return view('karyawan.index', compact('karyawan'));
     }
 
     /**
@@ -36,13 +33,12 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-        return view ('karyawan.create');
+        return view('karyawan.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -78,11 +74,10 @@ class KaryawanController extends Controller
         $profilePhotoPath = null;
         if ($request->hasFile('profile_photo')) {
             $profilePhoto = $request->file('profile_photo');
-            $namaFile = Str::slug($request->nama) . '_' . uniqid() . '.' . $profilePhoto->getClientOriginalExtension();
+            $namaFile = Str::slug($request->nama).'_'.uniqid().'.'.$profilePhoto->getClientOriginalExtension();
 
             $profilePhotoPath = $profilePhoto->storeAs('profile-photos', $namaFile, 'public');
         }
-
 
         Karyawan::create([
             'nama_karyawan' => $request->nama,
@@ -96,8 +91,6 @@ class KaryawanController extends Controller
         ]);
 
         return redirect()->route('karyawan.index')->with('success', 'Data karyawan berhasil ditambahkan!');
-
-
     }
 
     /**
@@ -125,7 +118,6 @@ class KaryawanController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -144,8 +136,7 @@ class KaryawanController extends Controller
     {
         $karyawan = Karyawan::findOrFail($id);
         $karyawan->delete();
+
         return redirect()->route('karyawan.index')->with('success', 'Data berhasil dihapus.');
-
-
     }
 }

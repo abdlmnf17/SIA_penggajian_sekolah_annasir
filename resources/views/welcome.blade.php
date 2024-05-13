@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,10 +63,9 @@
             color: #ffffff;
             font-weight: bold;
         }
-
-
     </style>
 </head>
+
 <body>
 
 
@@ -73,11 +73,11 @@
         <div class="welcome-card">
             <div class="text-center">
                 <img src="https://www.svgrepo.com/show/495136/card-send.svg" alt="Logo" class="welcome-logo">
-                <p class="text-center text-white">{{ config('app.name', 'Laravel') }}<br/>
+                <p class="text-center text-white">{{ config('app.name', 'Laravel') }}<br />
 
             </div>
 
-            <p class="text-center text-white">{{ config('app.nama_sekolah', 'Laravel') }}<br/>
+            <p class="text-center text-white">{{ config('app.nama_sekolah', 'Laravel') }}<br />
 
             </p>
             <div class="welcome-links">
@@ -98,4 +98,5 @@
     <!-- Bootstrap JS (optional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

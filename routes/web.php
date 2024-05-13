@@ -22,6 +22,3 @@ Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 Route::resource('user', App\Http\Controllers\UserController::class)->middleware('adminOrOwnUser');
 Route::resource('karyawan', App\Http\Controllers\KaryawanController::class);
-
-
-

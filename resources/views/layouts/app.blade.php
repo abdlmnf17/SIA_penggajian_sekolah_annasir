@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,7 +42,7 @@
                     <i class="fas fa-comments-dollar"></i>
 
 
-                </div><br/>
+                </div><br />
 
                 <div class="sidebar-brand-text mx-3">Sistem Penggajian</div>
             </a>
@@ -74,20 +75,19 @@
                 </a>
                 @php
                     $role = auth()->user()->role;
-                    @endphp
+                @endphp
 
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Data Master</h6>
-                        @if($role === 'admin')
-                        <a class="collapse-item" href="/user">User</a>
+                        @if ($role === 'admin')
+                            <a class="collapse-item" href="/user">User</a>
                         @endif
                         <a class="collapse-item" href="/karyawan">Karyawan</a>
                         <a class="collapse-item" href="/tunjangan">Potongan</a>
                         <a class="collapse-item" href="/potongan">Tunjangan</a>
-                        @if($role === 'admin')
-
-                        <a class="collapse-item" href="/akun">Data Akun</a>
+                        @if ($role === 'admin')
+                            <a class="collapse-item" href="/akun">Data Akun</a>
                         @endif
                     </div>
                 </div>
@@ -352,7 +352,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
 
-                                {{ config('app.name', 'Laravel') }}</span>
+                                    {{ config('app.name', 'Laravel') }}</span>
                             </a>
                             <!-- Dropdown - User Information -->
 
@@ -366,8 +366,7 @@
                                 <span class="mr-2 d-none d-lg-inline text-warning-600 small">
 
                                     {{ Auth::user()->name }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="/img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -385,7 +384,8 @@
                                     Activity Log --}}
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Keluar
                                 </a>
@@ -412,7 +412,8 @@
             <footer class="sticky-footer bg-dark-mode">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; {{ config('app.name', 'Laravel') }} |  {{ config('app.nama_sekolah', 'Laravel') }}</span>
+                        <span>Copyright &copy; {{ config('app.name', 'Laravel') }} |
+                            {{ config('app.nama_sekolah', 'Laravel') }}</span>
                     </div>
                 </div>
             </footer>
@@ -444,36 +445,36 @@
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
                     <a class="btn btn-primary" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
+                        onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">
-                     {{ __('Logout') }}
-                 </a>
-                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
+                        {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-<!-- Bootstrap core JavaScript-->
-<script src="/vendor/jquery/jquery.min.js"></script>
-<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="/js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="/vendor/chart.js/Chart.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="/vendor/chart.js/Chart.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="/js/demo/chart-area-demo.js"></script>
-<script src="/js/demo/chart-pie-demo.js"></script>
-<script src="/js/gaji.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="/js/demo/chart-area-demo.js"></script>
+    <script src="/js/demo/chart-pie-demo.js"></script>
+    <script src="/js/gaji.js"></script>
 
 
 </body>
