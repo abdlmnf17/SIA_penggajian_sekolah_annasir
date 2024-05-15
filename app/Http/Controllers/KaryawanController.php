@@ -141,7 +141,7 @@ class KaryawanController extends Controller
         if ($request->hasFile('profile_photo')) {
 
             if ($karyawan->photo) {
-                Storage::disk('public')->delete($karyawan->profile_photo);
+                Storage::disk('public')->delete($karyawan->photo);
             }
             $profilePhoto = $request->file('profile_photo');
             $namaFile = Str::slug($request->nama) . '_' . uniqid() . '.' . $profilePhoto->getClientOriginalExtension();

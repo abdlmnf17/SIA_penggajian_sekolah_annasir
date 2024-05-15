@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,3 +23,6 @@ Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 Route::resource('user', App\Http\Controllers\UserController::class)->middleware('adminOrOwnUser');
 Route::resource('karyawan', App\Http\Controllers\KaryawanController::class);
+Route::resource('tunjangan', App\Http\Controllers\TunjanganController::class);
+Route::resource('potongan', App\Http\Controllers\PotonganController::class);
+Route::resource('honormengajar', App\Http\Controllers\HonorMengajarController::class);

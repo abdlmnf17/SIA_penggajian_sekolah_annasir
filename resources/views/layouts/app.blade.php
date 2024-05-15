@@ -84,8 +84,8 @@
                             <a class="collapse-item" href="/user">User</a>
                         @endif
                         <a class="collapse-item" href="/karyawan">Karyawan</a>
-                        <a class="collapse-item" href="/tunjangan">Potongan</a>
-                        <a class="collapse-item" href="/potongan">Tunjangan</a>
+                        <a class="collapse-item" href="/tunjangan">Tunjangan</a>
+                        <a class="collapse-item" href="/potongan">Potongan</a>
                         @if ($role === 'admin')
                             <a class="collapse-item" href="/akun">Data Akun</a>
                         @endif
