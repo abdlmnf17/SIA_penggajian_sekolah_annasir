@@ -1,3 +1,74 @@
+# Aplikasi Penggajian Berbasis Web - Sistem Informasi Akuntansi
+
+## Instalasi Tools (Localhost)
+
+- CMD / Terminal
+- VSCODE / Text Editor lain
+- XAMPP (PHP 7.3 - 8.2) / Laragon (PHP 7.3 - 8.2)
+- Composer
+
+## Cara Pasang
+
+1. Clone projek melalui terminal / command prompt / git bash dengan perintah:
+   ```bash
+   git clone https://github.com/abdlmnf17/SIA_penggajian_sekolah_annasir.git
+   ```
+
+2. Pindahkan folder (SIA_penggajian_sekolah_annasir) hasil clone ke direktori Xampp/htdocs/disini (Jika memakai xampp).
+
+3. Buka Vscode, buka folder dan pilih SIA_penggajian_sekolah_annasir yang tadi sudah di-clone.
+
+4. Buka terminal di Vscode, ketik `composer install`, lalu tunggu sampai selesai.
+5. Pastikan sukses dan berhasil 
+6. Setelah berhasil dijalankan, buka / tambahkan terminal baru di VScode.
+
+8. Setelah itu cari file env.example paling bawah, copy dan paste di tempat itu juga, lalu ubah namanya env.examplecopy menjadi`.env`, lalu ketik di terminal `php artisan key:generate`,
+
+9. Masuk ke dalam .env dan ubah bagian `DB_DATABASE=`, menjadi nama database yang akan digunakan, contohnya `DB_DATABASE=penggajian_sekolah_annasir`. Lalu ubah juga APP_NAME dengan nama aplikasinya, jika ingin mengcustom namanya, lalu untuk isi SEKOLAH_NAME juga silahkan ubah jika ingin memakai nama sekolah lain.
+
+10. Buka phpMyAdmin, buat database baru berdasarkan nama yang ada di `.env`, yaitu `penggajian_sekolah_annasir`.
+
+11. Kembali ke Vscode, tambahkan terminal baru, lalu ketik `php artisan migrate`, dan tunggu migrasi sampai selesai.
+
+12. Setelah itu, instalasi user admin dengan seeder. Buka folder `database/seeder/AdminSeeder.php`.
+
+13. Ubah informasi admin, seperti nama, email, dan password.
+
+14. Jalankan perintah di terminal Vscode:
+    ```bash
+    php artisan db:seed --class=AdminSeeder
+    ```
+
+15. Tunggu sampai selesai. Setelah itu, ketik `php artisan config:cache`.
+
+16. Setelah selesai, ketik `php artisan serve`.
+
+17. Selesai! Buka link [localhost:8000](http://localhost:8000) dan login sebagai admin.
+
+## Fitur-Fitur
+
+- Transaksi Penggajian
+- Data Karyawan (Guru, Staff dll...)
+- Kelola Tunjangan
+- Kelola Potongan
+- Kelola slip gaji, jurnal umun, akuntansi dan laporan
+- dll...
+
+<br/>
+
+## Projek ini dibuat dengan Laravel 8
+
+
+
+
+
+
+
+
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
