@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Tunjangan;
-use Symfony\Contracts\Service\Attribute\Required;
+use Illuminate\Http\Request;
 
 class TunjanganController extends Controller
 {
@@ -16,6 +15,7 @@ class TunjanganController extends Controller
     public function index()
     {
         $tunjangan = Tunjangan::all();
+
         return view('tunjangan.index', compact('tunjangan'));
     }
 
@@ -32,12 +32,10 @@ class TunjanganController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
 
         $request->validate([
 
@@ -46,13 +44,12 @@ class TunjanganController extends Controller
 
         ]);
 
-        Tunjangan::create ([
+        Tunjangan::create([
             'nama_tunjangan' => $request->name,
             'jumlah_tunjangan' => $request->jumlah_tunjangan,
         ]);
 
         return redirect()->route('tunjangan.index')->with('success', 'Tunjangan berhasil ditambahkan.');
-
 
     }
 
@@ -76,13 +73,13 @@ class TunjanganController extends Controller
     public function edit($id)
     {
         $tunjangan = Tunjangan::findOrFail($id);
+
         return view('tunjangan.edit', compact('tunjangan'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -90,7 +87,7 @@ class TunjanganController extends Controller
     {
         $tunjangan = Tunjangan::findOrFail($id);
         $validasiData = $request->validate([
-            'name' => ['required', 'string', 'max:220' ],
+            'name' => ['required', 'string', 'max:220'],
             'jumlah_tunjangan' => ['required', 'integer'],
         ]);
 
@@ -100,8 +97,6 @@ class TunjanganController extends Controller
         ]);
 
         return redirect()->route('tunjangan.index')->with('success', 'Data berhasil diperbarui');
-
-
 
     }
 
@@ -116,6 +111,7 @@ class TunjanganController extends Controller
 
         $tunjangan = Tunjangan::findOrFail($id);
         $tunjangan->delete();
+
         return redirect()->route('tunjangan.index')->with('success', 'Data berhasil dihapus');
     }
 }

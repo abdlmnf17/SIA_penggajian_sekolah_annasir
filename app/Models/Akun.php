@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Akun extends Model
 {
     use HasFactory;
+
+    protected $table = 'akuns';
+
+    protected $fillable = [
+        'nama_akun',
+        'jenis_akun',
+    ];
+
+    public function jurnals()
+    {
+        return $this->hasMany(Jurnal::class);
+    }
 }

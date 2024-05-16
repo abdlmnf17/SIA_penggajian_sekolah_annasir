@@ -101,3 +101,26 @@ function confirmDelete() {
         reader.readAsDataURL(event.target.files[0]);
       }
 
+
+    $(document).ready(function() {
+        var tunjanganCount = 1;
+        $('#addTunjangan').click(function() {
+            tunjanganCount++;
+            var tunjanganSelect = `
+                <div class="row mb-3">
+                    <label for="tunjangan_${tunjanganCount}" class="col-md-4 col-form-label text-md-end">Tunjangan ${tunjanganCount}</label>
+                    <div class="col-md-6">
+                        <select id="tunjangan_${tunjanganCount}" class="form-control" name="tunjangan_ids[]" required>
+                            <option value="">Pilih Tunjangan</option>
+                            @foreach($tunjangans as $tunjang)
+                                <option value="{{ $tunjang->id }}">{{ $tunjang->nama_tunjang }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            `;
+            $('.tunjangan-container').append(tunjanganSelect);
+        });
+    });
+
+

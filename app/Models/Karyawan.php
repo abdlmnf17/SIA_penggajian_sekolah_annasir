@@ -20,4 +20,9 @@ class Karyawan extends Model
         'photo',
 
     ];
+
+    public function gajis()
+    {
+        return $this->hasMany(Gaji::class);
+    }
 }

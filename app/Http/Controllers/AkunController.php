@@ -2,83 +2,66 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Akun;
 use Illuminate\Http\Request;
 
 class AkunController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $akun = Akun::all();
+
+        return view('akun.index', compact('akun'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('akun.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_akun' => ['required', 'string', 'max:200'],
+            'jenis_akun' => ['required', 'string'],
+        ]);
+
+        Akun::create([
+            'nama_akun' => $request->nama_akun,
+            'jenis_akun' => $request->jenis_akun,
+        ]);
+
+        return redirect()->route('akun.index')->with('success', 'Akun berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $akun = Akun::findOrFail($id);
+
+        return view('akun.edit', compact('akun'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $akun = Akun::findOrFail($id);
+        $validasiData = $request->validate([
+            'nama_akun' => ['required', 'string', 'max:220'],
+            'jenis_akun' => ['required', 'string'],
+        ]);
+
+        $akun->update([
+            'nama_akun' => $validasiData['nama_akun'],
+            'jenis_akun' => $validasiData['jenis_akun'],
+        ]);
+
+        return redirect()->route('akun.index')->with('success', 'Data berhasil diperbarui');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $akun = Akun::findOrFail($id);
+        $akun->delete();
+
+        return redirect()->route('akun.index')->with('success', 'Data berhasil dihapus');
     }
 }

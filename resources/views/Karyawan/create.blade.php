@@ -17,7 +17,7 @@
                                     <div class="form-group">
                                         <label for="profile_photo">Foto Profil</label>
                                         <input type="file" class="form-control-file" id="profile_photo"
-                                            name="profile_photo" accept="image/*" required onchange="previewImage(event)">
+                                            name="profile_photo" accept="image/*" onchange="previewImage(event)">
                                         @error('profile_photo')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

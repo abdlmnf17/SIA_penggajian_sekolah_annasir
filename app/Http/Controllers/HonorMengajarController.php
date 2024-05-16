@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\HonorMengajar;
+use Illuminate\Http\Request;
+
 class HonorMengajarController extends Controller
 {
     /**
@@ -14,6 +15,7 @@ class HonorMengajarController extends Controller
     public function index()
     {
         $honormengajar = HonorMengajar::all();
+
         return view('honormengajar.index', compact('honormengajar'));
     }
 
@@ -30,7 +32,6 @@ class HonorMengajarController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -70,13 +71,13 @@ class HonorMengajarController extends Controller
     public function edit($id)
     {
         $honormengajar = HonorMengajar::findOrFail($id);
+
         return view('honormengajar.edit', compact('honormengajar'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -96,9 +97,6 @@ class HonorMengajarController extends Controller
 
         return redirect()->route('honormengajar.index')->with('success', 'Data berhasil diperbarui');
 
-
-
-
     }
 
     /**
@@ -111,6 +109,7 @@ class HonorMengajarController extends Controller
     {
         $honormengajar = HonorMengajar::findOrFail($id);
         $honormengajar->delete();
+
         return redirect()->route('honormengajar.index')->with('success', 'Data berhasil dihapus');
     }
 }

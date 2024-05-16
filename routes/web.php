@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,3 +25,5 @@ Route::resource('karyawan', App\Http\Controllers\KaryawanController::class);
 Route::resource('tunjangan', App\Http\Controllers\TunjanganController::class);
 Route::resource('potongan', App\Http\Controllers\PotonganController::class);
 Route::resource('honormengajar', App\Http\Controllers\HonorMengajarController::class);
+Route::resource('akun', App\Http\Controllers\AkunController::class);
+Route::resource('gaji', App\Http\Controllers\GajiController::class);

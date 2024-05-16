@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Potongan;
+use Illuminate\Http\Request;
 
 class PotonganController extends Controller
 {
@@ -16,6 +16,7 @@ class PotonganController extends Controller
     {
 
         $potongan = Potongan::all();
+
         return view('potongan.index', compact('potongan'));
     }
 
@@ -32,7 +33,6 @@ class PotonganController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,7 +44,7 @@ class PotonganController extends Controller
 
         ]);
 
-        Potongan::create ([
+        Potongan::create([
             'nama_potongan' => $request->name,
             'jumlah_potongan' => $request->jumlah_potongan,
         ]);
@@ -72,13 +72,13 @@ class PotonganController extends Controller
     public function edit($id)
     {
         $potongan = Potongan::findOrFail($id);
+
         return view('potongan.edit', compact('potongan'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -86,7 +86,7 @@ class PotonganController extends Controller
     {
         $potongan = Potongan::findOrFail($id);
         $validasiData = $request->validate([
-            'name' => ['required', 'string', 'max:220' ],
+            'name' => ['required', 'string', 'max:220'],
             'jumlah_potongan' => ['required', 'integer'],
         ]);
 
@@ -109,6 +109,7 @@ class PotonganController extends Controller
     {
         $potongan = Potongan::findOrFail($id);
         $potongan->delete();
+
         return redirect()->route('potongan.index')->with('success', 'Data berhasil dihapus');
     }
 }
