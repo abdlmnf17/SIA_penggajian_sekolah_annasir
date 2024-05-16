@@ -28,7 +28,7 @@
 
 10. Buka phpMyAdmin, buat database baru berdasarkan nama yang ada di `.env`, yaitu `penggajian_sekolah_annasir`.
 
-11. Kembali ke Vscode, tambahkan terminal baru, lalu ketik `php artisan migrate`, dan tunggu migrasi sampai selesai.
+11. Kembali ke Vscode, tambahkan terminal baru, lalu ketik `php artisan storage:link`, setelah berhasil ketik `php artisan migrate`, dan tunggu migrasi sampai selesai.
 
 12. Setelah itu, instalasi user admin dengan seeder. Buka folder `database/seeder/AdminSeeder.php`.
 
