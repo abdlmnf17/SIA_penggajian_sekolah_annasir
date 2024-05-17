@@ -52,7 +52,7 @@
                             <tr align="center">
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $tunjanganItem->nama_tunjangan }}</td>
-                                <td>Rp. {{ $tunjanganItem->jumlah_tunjangan }}</td>
+                                <td>Rp. {{ number_format($tunjanganItem->jumlah_tunjangan, 2, ',', '.') }}</td>
                                 <td>
                                     <a href="{{ route('tunjangan.edit', $tunjanganItem->id) }}" class="btn btn-sm btn-info">
                                         <i class="far fa-edit"></i> Edit

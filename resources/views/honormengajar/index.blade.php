@@ -52,7 +52,7 @@
                             <tr align="center">
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $honormengajarItem->jam_mengajar }}</td>
-                                <td>Rp. {{ $honormengajarItem->jumlah_mengajar }}</td>
+                                <td>Rp. {{ number_format($honormengajarItem->jumlah_mengajar, 2, ',', '.') }} </td>
                                 <td>
                                     <a href="{{ route('honormengajar.edit', $honormengajarItem->id) }}" class="btn btn-sm btn-info">
                                         <i class="far fa-edit"></i> Edit

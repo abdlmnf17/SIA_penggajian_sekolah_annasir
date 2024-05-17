@@ -14,10 +14,13 @@ class Akun extends Model
     protected $fillable = [
         'nama_akun',
         'jenis_akun',
+        'kode_akun',
+        'jumlah_akun',
     ];
 
     public function jurnals()
     {
         return $this->hasMany(Jurnal::class);
     }
+
 }

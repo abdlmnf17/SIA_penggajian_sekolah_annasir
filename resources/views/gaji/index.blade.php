@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-lg-9 mb-10 mx-auto">
+    <div class="col-lg-12 mb-10 mx-auto">
         <!-- Menampilkan pesan kesuksesan -->
         @if (session('success'))
             <div class="alert alert-warning alert-dismissible">
@@ -58,10 +58,10 @@
                                 <td>{{ $gaji->kode_gaji }}</td>
                                 <td>{{ $gaji->karyawan->nama_karyawan }}</td>
                                 <td>{{ $gaji->karyawan->jabatan }}</td>
-                                <td>{{ $gaji->total_gaji }}</td>
+                                <td>Rp. {{ number_format($gaji->total_gaji, 2, ',', '.') }}
                                 <td>
-                                    <a href="{{ route('gaji.edit', $gaji->id) }}" class="btn btn-sm btn-info">
-                                        <i class="far fa-edit"></i> Edit
+                                    <a href="{{ route('gaji.show', $gaji->id) }}" class="btn btn-sm btn-info">
+                                        <i class="far fa-id-card"></i> Detail
                                     </a>
                                     <!-- Tombol Hapus -->
                                     <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"

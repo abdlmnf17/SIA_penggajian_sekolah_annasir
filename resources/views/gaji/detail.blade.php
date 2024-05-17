@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-dark text-white">Detail Gaji</div>
+                <div class="card-header bg-dark text-white">Detail Slip Gaji</div>
 
                 <div class="card-body bg-dark text-white">
                     <table class="table table-bordered table-dark">
@@ -21,6 +21,14 @@
                             <tr>
                                 <th scope="row">Karyawan</th>
                                 <td>{{ $gaji->karyawan->nama_karyawan }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Bidang Studi</th>
+                                <td>{{ $gaji->karyawan->bidang_studi }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Jabatan</th>
+                                <td>{{ $gaji->karyawan->jabatan }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Jumlah Absen/hari</th>

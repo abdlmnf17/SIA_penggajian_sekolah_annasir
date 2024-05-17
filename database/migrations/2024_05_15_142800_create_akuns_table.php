@@ -15,8 +15,10 @@ class CreateAkunsTable extends Migration
     {
         Schema::create('akuns', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_akun');
+            $table->string('kode_akun');
             $table->string('jenis_akun');
+            $table->string('nama_akun');
+            $table->integer('jumlah_akun');
             $table->timestamps();
         });
     }

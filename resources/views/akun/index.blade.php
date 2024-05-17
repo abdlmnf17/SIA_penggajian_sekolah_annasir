@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-lg-9 mb-10 mx-auto">
+    <div class="col-lg-11 mb-10 mx-auto">
         <!-- Menampilkan pesan kesuksesan -->
         @if (session('success'))
             <div class="alert alert-warning alert-dismissible">
@@ -42,17 +42,21 @@
                     <thead>
                         <tr align="center">
                             <th style="width: 5%">#</th>
+                            <th style="width: 10%">Kode Akun</th>
                             <th style="width: 20%">Nama Akun</th>
                             <th style="width: 20%">Jenis Akun</th>
-                            <th style="width: 15%">Aksi</th>
+                            <th style="width: 20%">Jumlah Akun</th>
+                            <th style="width: 205%">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($akun as $index => $akunItem)
                             <tr align="center">
                                 <td>{{ $index + 1 }}</td>
+                                <td>{{ $akunItem->kode_akun }}</td>
                                 <td>{{ $akunItem->nama_akun }}</td>
                                 <td>{{ $akunItem->jenis_akun }}</td>
+                                <td>Rp. {{ number_format($akunItem->jumlah_akun, 2, ',', '.') }}</td>
                                 <td>
                                     <a href="{{ route('akun.edit', $akunItem->id) }}" class="btn btn-sm btn-info">
                                         <i class="far fa-edit"></i> Edit
@@ -116,6 +120,14 @@
                     </div>
                     <div class="modal-body">
                         <div class="row mb-3">
+                            <label for="kode_akun" class="col-md-4 col-form-label text-md-end">Kode Akun</label>
+                            <div class="col-md-6">
+                                <input id="kode_akun" type="number"
+                                    class="form-control @error('kode_akun') is-invalid @enderror" name="kode_akun"
+                                    value="{{ old('kode_akun') }}" required autocomplete="kode_akun" autofocus>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             <label for="nama_akun" class="col-md-4 col-form-label text-md-end">Nama Akun</label>
                             <div class="col-md-6">
                                 <input id="nama_akun" type="text"
@@ -124,6 +136,10 @@
                             </div>
                         </div>
 
+
+
+
+
                         <div class="row mb-3">
                             <label for="jenis_akun" class="col-md-4 col-form-label text-md-end">Jenis Akun</label>
                             <div class="col-md-6">
@@ -131,6 +147,16 @@
                                     class="form-control @error('jenis_akun') is-invalid @enderror"
                                     name="jenis_akun" value="{{ old('jenis_akun') }}" required
                                     autocomplete="jenis_akun">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="jumlah_akun" class="col-md-4 col-form-label text-md-end">Jumlah Akun</label>
+                            <div class="col-md-6">
+                                <input id="jumlah_akun" type="number"
+                                    class="form-control @error('jumlah_akun') is-invalid @enderror"
+                                    name="jumlah_akun" value="{{ old('jumlah_akun') }}" required
+                                    autocomplete="jumlah_akun">
                             </div>
                         </div>
                     </div>

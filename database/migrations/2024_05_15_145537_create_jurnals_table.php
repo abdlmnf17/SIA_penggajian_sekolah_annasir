@@ -15,10 +15,12 @@ class CreateJurnalsTable extends Migration
     {
         Schema::create('jurnals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('akun_id')->constrained('akuns')->onDelete('cascade');
             $table->foreignId('gaji_id')->constrained('gajis')->onDelete('cascade');
-            $table->integer('debit');
-            $table->integer('kredit');
+            $table->foreignId('akun_debit_id')->constrained('akuns')->onDelete('cascade');
+            $table->foreignId('akun_kredit_id')->constrained('akuns')->onDelete('cascade');
+            $table->string('keterangan');
+            $table->integer('jumlah_akun_debit');
+            $table->integer('jumlah_akun_kredit');
             $table->timestamps();
         });
     }

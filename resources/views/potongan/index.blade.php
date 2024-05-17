@@ -52,7 +52,7 @@
                             <tr align="center">
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $potonganItem->nama_potongan }}</td>
-                                <td>Rp. {{ $potonganItem->jumlah_potongan }}</td>
+                                <td>Rp. {{ number_format($potonganItem->jumlah_potongan, 2, ',', '.') }}</td>
                                 <td>
                                     <a href="{{ route('potongan.edit', $potonganItem->id) }}" class="btn btn-sm btn-info">
                                         <i class="far fa-edit"></i> Edit

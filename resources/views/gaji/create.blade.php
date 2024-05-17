@@ -11,6 +11,35 @@
                         <form method="POST" action="{{ route('gaji.store') }}">
                             @csrf
 
+
+                            <div class="row mb-3">
+                                <label for="kode_gaji" class="col-md-4 col-form-label text-md-end">Kode Gaji</label>
+                                <div class="col-md-6">
+                                    <input id="kode_gaji" type="text"
+                                        class="form-control @error('kode_gaji') is-invalid @enderror" name="kode_gaji"
+                                        value="GAJI/01/01/....."  required>
+                                    @error('kode_gaji')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="tanggal_gaji" class="col-md-4 col-form-label text-md-end">Tanggal Gaji</label>
+                                <div class="col-md-6">
+                                    <input id="tanggal_gaji" type="date"
+                                        class="form-control @error('tanggal_gaji') is-invalid @enderror" name="tanggal_gaji"
+                                        value="{{ old('tanggal_gaji') }}" required>
+                                    @error('tanggal_gaji')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="row mb-3">
                                 <label for="karyawan_id" class="col-md-4 col-form-label text-md-end">Karyawan</label>
                                 <div class="col-md-6">
@@ -40,7 +69,7 @@
                                             @foreach ($tunjangans as $tunjangan)
                                                 <option value="{{ $tunjangan->id }}"
                                                     data-jumlah="{{ $tunjangan->jumlah_tunjangan }}">
-                                                    {{ $tunjangan->nama_tunjangan }}</option>
+                                                    {{ $tunjangan->nama_tunjangan }} | Rp. {{ number_format($tunjangan->jumlah_tunjangan, 2, ',', '.') }} </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -61,9 +90,10 @@
                                             @foreach ($potongans as $potongan)
                                                 <option value="{{ $potongan->id }}"
                                                     data-jumlah="{{ $potongan->jumlah_potongan }}">
-                                                    {{ $potongan->nama_potongan }}</option>
+                                                    {{ $potongan->nama_potongan }} | Rp. {{ number_format($potongan->jumlah_potongan, 2, ',', '.') }}</option>
                                             @endforeach
                                         </select>
+                                        Potongan tidak ada? silahkan isi terlebih dahulu <a href="/potongan" class="text-warning">di sini</a>
                                     </div>
                                     <div class="col-md-2">
                                         <button type="button" class="btn btn-success" id="addPotongan">Tambah
@@ -83,9 +113,10 @@
                                         @foreach ($honorMengajars as $honorMengajar)
                                             <option value="{{ $honorMengajar->id }}"
                                                 data-jumlah="{{ $honorMengajar->jumlah_mengajar }}">
-                                                {{ $honorMengajar->jam_mengajar }}</option>
+                                                {{ $honorMengajar->jam_mengajar }} | Rp. {{ number_format($honorMengajar->jumlah_mengajar, 2, ',', '.') }}</option>
                                         @endforeach
                                     </select>
+                                    Honor mengajar tidak ada? silahkan isi terlebih dahulu <a href="/honormengajar" class="text-warning">di sini</a>
                                     @error('honor_mengajar_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -94,33 +125,8 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label for="kode_gaji" class="col-md-4 col-form-label text-md-end">Kode Gaji</label>
-                                <div class="col-md-6">
-                                    <input id="kode_gaji" type="text"
-                                        class="form-control @error('kode_gaji') is-invalid @enderror" name="kode_gaji"
-                                        value="{{ old('kode_gaji') }}" required>
-                                    @error('kode_gaji')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
 
-                            <div class="row mb-3">
-                                <label for="tanggal_gaji" class="col-md-4 col-form-label text-md-end">Tanggal Gaji</label>
-                                <div class="col-md-6">
-                                    <input id="tanggal_gaji" type="date"
-                                        class="form-control @error('tanggal_gaji') is-invalid @enderror" name="tanggal_gaji"
-                                        value="{{ old('tanggal_gaji') }}" required>
-                                    @error('tanggal_gaji')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
+
 
                             <div class="row mb-3">
                                 <label for="jumlah_absen" class="col-md-4 col-form-label text-md-end">Jumlah Absen/hari</label>
