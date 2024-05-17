@@ -79,6 +79,8 @@
 
 
                     <a href="{{ route('gaji.index') }}" class="btn btn-primary mt-3">Kembali</a>
+                    <a href="{{ route('slipgaji.pdf', $gaji->id) }}" class="btn btn-warning mt-3">Cetak Slip Gaji</a>
+
                 </div>
             </div>
         </div>
