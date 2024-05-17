@@ -41,58 +41,56 @@ class KaryawanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function store(Request $request)
+    {
+        $messages = [
+            'required' => ':attribute wajib diisi.',
+            'unique' => ':attribute sudah terdaftar. Silakan gunakan NIK yang berbeda.',
+            'max' => 'Maksimal :max karakter.',
+            'min' => 'Minimal :min karakter',
+        ];
 
-     public function store(Request $request)
-{
-    $messages = [
-        'required' => ':attribute wajib diisi.',
-        'unique' => ':attribute sudah terdaftar. Silakan gunakan NIK yang berbeda.',
-        'max' => 'Maksimal :max karakter.',
-        'min' => 'Minimal :min karakter',
-    ];
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'nik' => 'required|string|unique:karyawans,nik|max:255|min:7',
+            'jabatan' => 'required|string|max:255',
+            'no_telepon' => 'required|string|max:225',
+            'studi' => 'required|string|max:225',
+            'tgs' => 'required|string|max:225',
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'ttl' => 'required|date',
+        ], $messages, [
+            'nama' => 'Nama',
+            'nik' => 'NIK',
+            'jabatan' => 'Jabatan',
+            'tgs' => 'Tugas Tambahan',
+            'no_telepon' => 'No Telepon',
+            'profile_photo' => 'Foto Profil',
+            'ttl' => 'Tanggal Lahir',
+            'studi' => 'Bidang Studi',
+        ]);
 
-    $request->validate([
-        'nama' => 'required|string|max:255',
-        'nik' => 'required|string|unique:karyawans,nik|max:255|min:7',
-        'jabatan' => 'required|string|max:255',
-        'no_telepon' => 'required|string|max:225',
-        'studi' => 'required|string|max:225',
-        'tgs' => 'required|string|max:225',
-        'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'ttl' => 'required|date',
-    ], $messages, [
-        'nama' => 'Nama',
-        'nik' => 'NIK',
-        'jabatan' => 'Jabatan',
-        'tgs' => 'Tugas Tambahan',
-        'no_telepon' => 'No Telepon',
-        'profile_photo' => 'Foto Profil',
-        'ttl' => 'Tanggal Lahir',
-        'studi' => 'Bidang Studi',
-    ]);
+        $profilePhotoPath = '/img/undraw_profile.svg'; // default path
 
-    $profilePhotoPath = '/img/undraw_profile.svg'; // default path
+        if ($request->hasFile('profile_photo')) {
+            $profilePhoto = $request->file('profile_photo');
+            $namaFile = Str::slug($request->nama).'_'.uniqid().'.'.$profilePhoto->getClientOriginalExtension();
+            $profilePhotoPath = $profilePhoto->storeAs('profile-photos', $namaFile, 'public');
+        }
 
-    if ($request->hasFile('profile_photo')) {
-        $profilePhoto = $request->file('profile_photo');
-        $namaFile = Str::slug($request->nama) . '_' . uniqid() . '.' . $profilePhoto->getClientOriginalExtension();
-        $profilePhotoPath = $profilePhoto->storeAs('profile-photos', $namaFile, 'public');
+        Karyawan::create([
+            'nama_karyawan' => $request->nama,
+            'nik' => $request->nik,
+            'jabatan' => $request->jabatan,
+            'tugas_tambahan' => $request->tgs,
+            'bidang_studi' => $request->studi,
+            'no_telepon' => $request->no_telepon,
+            'photo' => $profilePhotoPath,
+            'tanggal_lahir' => $request->ttl,
+        ]);
+
+        return redirect()->route('karyawan.index')->with('success', 'Data karyawan berhasil ditambahkan!');
     }
-
-    Karyawan::create([
-        'nama_karyawan' => $request->nama,
-        'nik' => $request->nik,
-        'jabatan' => $request->jabatan,
-        'tugas_tambahan' => $request->tgs,
-        'bidang_studi' => $request->studi,
-        'no_telepon' => $request->no_telepon,
-        'photo' => $profilePhotoPath,
-        'tanggal_lahir' => $request->ttl,
-    ]);
-
-    return redirect()->route('karyawan.index')->with('success', 'Data karyawan berhasil ditambahkan!');
-}
-
 
     /**
      * Display the specified resource.

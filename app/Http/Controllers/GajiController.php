@@ -44,37 +44,31 @@ class GajiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'karyawan_id' => 'required|exists:karyawans,id',
+            'honor_mengajar_id' => 'required|exists:honormengajars,id',
+            'kode_gaji' => 'required|string|unique:gajis,kode_gaji|max:255',
+            'tanggal_gaji' => 'required|date',
+            'jumlah_absen' => 'required|integer',
+            'total_absen' => 'required|integer',
+            'total_gaji' => 'required|integer',
+            'tunjangan_ids.*' => 'required|exists:tunjangans,id',
+            'potongan_ids.*' => 'required|exists:potongans,id',
+        ]);
 
-     public function store(Request $request)
-{
-    $request->validate([
-        'karyawan_id' => 'required|exists:karyawans,id',
-        'honor_mengajar_id' => 'required|exists:honormengajars,id',
-        'kode_gaji' => 'required|string|unique:gajis,kode_gaji|max:255',
-        'tanggal_gaji' => 'required|date',
-        'jumlah_absen' => 'required|integer',
-        'total_absen' => 'required|integer',
-        'total_gaji' => 'required|integer',
-        'tunjangan_ids.*' => 'required|exists:tunjangans,id',
-        'potongan_ids.*' => 'required|exists:potongans,id',
-    ]);
+        // Buat entri gaji
+        $gaji = Gaji::create($request->except('tunjangan_ids', 'potongan_ids'));
 
-    // Buat entri gaji
-    $gaji = Gaji::create($request->except('tunjangan_ids', 'potongan_ids'));
+        // Lampirkan tunjangan yang dipilih ke entri gaji menggunakan attach
+        $tunjanganIds = collect($request->tunjangan_ids)->unique(); // Hapus duplikat tunjangan jika ada
+        $potonganIds = collect($request->potongan_ids)->unique(); // Hapus duplikat potongan jika ada
+        $gaji->tunjangan()->attach($tunjanganIds);
+        $gaji->potongan()->attach($potonganIds);
 
-    // Lampirkan tunjangan yang dipilih ke entri gaji menggunakan attach
-    $tunjanganIds = collect($request->tunjangan_ids)->unique(); // Hapus duplikat tunjangan jika ada
-    $potonganIds = collect($request->potongan_ids)->unique(); // Hapus duplikat potongan jika ada
-    $gaji->tunjangan()->attach($tunjanganIds);
-    $gaji->potongan()->attach($potonganIds);
-
-
-
-
-    return redirect()->route('gaji.index')->with('success', 'Gaji berhasil ditambahkan');
-}
-
-
+        return redirect()->route('gaji.index')->with('success', 'Gaji berhasil ditambahkan');
+    }
 
     /**
      * Display the specified resource.
@@ -85,6 +79,7 @@ class GajiController extends Controller
     public function show($id)
     {
         $gaji = Gaji::with(['karyawan', 'tunjangan', 'potongan', 'honorMengajar'])->findOrFail($id);
+
         return view('gaji.detail', compact('gaji'));
     }
 

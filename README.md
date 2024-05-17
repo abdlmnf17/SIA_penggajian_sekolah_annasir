@@ -20,30 +20,29 @@
 
 4. Buka terminal di Vscode, ketik `composer install`, lalu tunggu sampai selesai.
 5. Pastikan sukses dan berhasil 
-6. Setelah berhasil dijalankan, buka / tambahkan terminal baru di VScode.
 
-8. Setelah itu cari file env.example paling bawah, copy dan paste di tempat itu juga, lalu ubah namanya env.examplecopy menjadi`.env`, lalu ketik di terminal `php artisan key:generate`,
+6. Setelah itu cari file env.example paling bawah, copy dan paste di tempat itu juga, lalu ubah namanya env.examplecopy menjadi`.env`, lalu ketik di terminal `php artisan key:generate`,
 
-9. Masuk ke dalam .env dan ubah bagian `DB_DATABASE=`, menjadi nama database yang akan digunakan, contohnya `DB_DATABASE=penggajian_sekolah_annasir`. Lalu ubah juga APP_NAME dengan nama aplikasinya, jika ingin mengcustom namanya, lalu untuk isi SEKOLAH_NAME juga silahkan ubah jika ingin memakai nama sekolah lain.
+7. Masuk ke dalam .env dan ubah bagian `DB_DATABASE=`, menjadi nama database yang akan digunakan, contohnya `DB_DATABASE=penggajian_sekolah_annasir`. Lalu ubah juga APP_NAME dengan nama aplikasinya, jika ingin mengcustom namanya, lalu untuk isi SEKOLAH_NAME juga silahkan ubah jika ingin memakai nama sekolah lain.
 
-10. Buka phpMyAdmin, buat database baru berdasarkan nama yang ada di `.env`, yaitu `penggajian_sekolah_annasir`.
+8. Buka phpMyAdmin, buat database baru berdasarkan nama yang ada di `.env`, yaitu `penggajian_sekolah_annasir`.
 
-11. Kembali ke Vscode, tambahkan terminal baru, lalu ketik `php artisan storage:link`, setelah berhasil ketik `php artisan migrate`, dan tunggu migrasi sampai selesai.
+9. Kembali ke Vscode, tambahkan terminal baru, lalu ketik `php artisan storage:link`, setelah berhasil ketik `php artisan migrate`, dan tunggu migrasi sampai selesai.
 
-12. Setelah itu, instalasi user admin dengan seeder. Buka folder `database/seeder/AdminSeeder.php`.
+10. Setelah itu, instalasi user admin dengan seeder. Buka folder `database/seeder/AdminSeeder.php`.
 
-13. Ubah informasi admin, seperti nama, email, dan password.
+11. Ubah informasi admin, seperti nama, email, dan password.
 
-14. Jalankan perintah di terminal Vscode:
+12. Jalankan perintah di terminal Vscode:
     ```bash
-    php artisan db:seed --class=AdminSeeder
+    php artisan db:seed
     ```
 
-15. Tunggu sampai selesai. Setelah itu, ketik `php artisan config:cache`.
+13. Tunggu sampai selesai. Setelah itu, ketik `php artisan config:cache`.
 
-16. Setelah selesai, ketik `php artisan serve`.
+14. Setelah selesai, ketik `php artisan serve`.
 
-17. Selesai! Buka link [localhost:8000](http://localhost:8000) dan login sebagai admin.
+15. Selesai! Buka link [localhost:8000](http://localhost:8000) dan login sebagai admin.
 
 ## Fitur-Fitur
 

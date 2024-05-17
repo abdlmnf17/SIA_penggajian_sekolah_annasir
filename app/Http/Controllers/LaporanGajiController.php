@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Gaji;
-use App\Models\Karyawan;
-use App\Models\Potongan;
-use App\Models\Tunjangan;
+use Illuminate\Http\Request;
 use PDF;
 
 class LaporanGajiController extends Controller
@@ -53,6 +50,6 @@ class LaporanGajiController extends Controller
         $pdf->setPaper('A4', 'landscape'); // Ubah 'A4' sesuai dengan ukuran kertas yang diinginkan, dan 'landscape' untuk orientasi landscape
 
         // Unduh PDF
-        return $pdf->download('laporan_gaji_' . $tanggal_mulai . '_to_' . $tanggal_selesai . '.pdf');
+        return $pdf->download('laporan_gaji_'.$tanggal_mulai.'_to_'.$tanggal_selesai.'.pdf');
     }
 }

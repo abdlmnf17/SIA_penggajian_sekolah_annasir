@@ -12,8 +12,7 @@ class HonorMengajarSeeder extends Seeder
      *
      * @return void
      */
-
-     public function run()
+    public function run()
     {
         for ($jam = 1; $jam <= 24; $jam++) {
             HonorMengajar::create([

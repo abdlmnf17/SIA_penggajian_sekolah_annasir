@@ -39,4 +39,3 @@ Route::post('/laporanjurnal-pdf', [App\Http\Controllers\LaporanJurnalController:
 
 // Route::get('/slip-gaji/{id}/pdf', [App\Http\Controllers\LaporanJurnalController::class, 'index'])->name('gaji.index');
 Route::get('/slip-gaji/{id}/pdf', [App\Http\Controllers\SlipGajiController::class, 'generatePDF'])->name('slipgaji.pdf');
-

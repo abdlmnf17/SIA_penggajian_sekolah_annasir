@@ -11,7 +11,7 @@ class Gaji extends Model
 
     protected $fillable = [
         'karyawan_id', 'honor_mengajar_id', 'kode_gaji',
-        'tanggal_gaji', 'jumlah_absen', 'total_absen', 'total_gaji'
+        'tanggal_gaji', 'jumlah_absen', 'total_absen', 'total_gaji',
     ];
 
     public function tunjangan()
@@ -28,7 +28,6 @@ class Gaji extends Model
     {
         return $this->belongsToMany(Potongan::class, 'detail_gaji_potongan', 'gaji_id', 'potongan_id');
     }
-
 
     public function honorMengajar()
     {

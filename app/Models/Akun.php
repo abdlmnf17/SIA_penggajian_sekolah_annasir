@@ -22,5 +22,4 @@ class Akun extends Model
     {
         return $this->hasMany(Jurnal::class);
     }
-
 }
