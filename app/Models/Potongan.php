@@ -16,6 +16,6 @@ class Potongan extends Model
 
     public function gajis()
     {
-        return $this->belongsToMany(Gaji::class, 'detail_gaji_tunjangan', 'potongan_id', 'gaji_id');
+        return $this->belongsToMany(Gaji::class, 'detail_gaji_potongan', 'potongan_id', 'gaji_id');
     }
 }
