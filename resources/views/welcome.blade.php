@@ -83,7 +83,7 @@
             <div class="welcome-links">
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/home') }}" class="btn btn-warning">Masuk Dashboard</a>
+                        <a href="{{ url('/dashboard') }}" class="btn btn-warning">Masuk Dashboard</a>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-warning">Masuk</a>
                         {{-- @if (Route::has('register'))
