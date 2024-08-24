@@ -25,4 +25,15 @@ class Karyawan extends Model
     {
         return $this->hasMany(Gaji::class);
     }
+    // Relasi ke Tunjangan
+    public function tunjangan()
+    {
+        return $this->hasMany(Tunjangan::class,  'karyawan_id');
+    }
+
+    // Relasi ke Potongan
+    public function potongan()
+    {
+        return $this->hasMany(Potongan::class,  'karyawan_id');
+    }
 }

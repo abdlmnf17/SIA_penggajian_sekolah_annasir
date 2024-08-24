@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tunjangan;
 use Illuminate\Http\Request;
+use App\Models\Karyawan;
 
 class TunjanganController extends Controller
 {
@@ -15,8 +16,9 @@ class TunjanganController extends Controller
     public function index()
     {
         $tunjangan = Tunjangan::all();
+        $karyawans = Karyawan::all();
 
-        return view('tunjangan.index', compact('tunjangan'));
+        return view('tunjangan.index', compact('tunjangan', 'karyawans'));
     }
 
     /**
@@ -41,12 +43,14 @@ class TunjanganController extends Controller
 
             'name' => ['required', 'string', 'max:200'],
             'jumlah_tunjangan' => ['required', 'integer'],
+            'karyawan_id' => ['required', 'exists:karyawans,id'],
 
         ]);
 
         Tunjangan::create([
             'nama_tunjangan' => $request->name,
             'jumlah_tunjangan' => $request->jumlah_tunjangan,
+            'karyawan_id' => $request->karyawan_id,
         ]);
 
         return redirect()->route('tunjangan.index')->with('success', 'Tunjangan berhasil ditambahkan.');

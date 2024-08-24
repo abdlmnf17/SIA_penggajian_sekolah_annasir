@@ -38,7 +38,7 @@
                 <h4 class="m-15 font-weight-bold">{{ __('Daftar Tunjangan') }}</h4>
             </div>
             <div class="card-body bg-dark">
-                <table id="dataTable" class="table table-bordered text-white" cellspacing="1"><br />
+                <table id="dataTable" class="table table-bordered text-white" cellspacing="1">
                     <thead>
                         <tr align="center">
                             <th style="width: 5%">#</th>
@@ -102,7 +102,6 @@
     <!-- Modal Tambah Tunjangan -->
     <div class="modal fade text-dark" id="addTunjanganModal" tabindex="-1" role="dialog"
         aria-labelledby="addTunjanganModalLabel" aria-hidden="true">
-        <!-- Isi Modal Tambah  -->
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form method="post" action="{{ route('tunjangan.store') }}">
@@ -121,6 +120,11 @@
                                 <input id="name" type="text"
                                     class="form-control @error('name') is-invalid @enderror" name="name"
                                     value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -131,6 +135,30 @@
                                     class="form-control @error('jumlah_tunjangan') is-invalid @enderror"
                                     name="jumlah_tunjangan" value="{{ old('jumlah_tunjangan') }}" required
                                     autocomplete="jumlah_tunjangan">
+                                @error('jumlah_tunjangan')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="karyawan_id" class="col-md-4 col-form-label text-md-end">Karyawan</label>
+                            <div class="col-md-6">
+                                <select id="karyawan_id" class="form-control @error('karyawan_id') is-invalid @enderror"
+                                    name="karyawan_id" required>
+                                    <option value="">Pilih Karyawan</option>
+                                    @foreach ($karyawans as $karyawan)
+                                        <option value="{{ $karyawan->id }}">{{ $karyawan->nama_karyawan }}
+                                            ({{ $karyawan->jabatan }})</option>
+                                    @endforeach
+                                </select>
+                                @error('karyawan_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                     </div>

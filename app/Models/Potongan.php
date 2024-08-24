@@ -12,10 +12,11 @@ class Potongan extends Model
     protected $fillable = [
         'nama_potongan',
         'jumlah_potongan',
+        'karyawan_id',
     ];
 
     public function gajis()
     {
-        return $this->belongsToMany(Gaji::class, 'detail_gaji_potongan', 'potongan_id', 'gaji_id');
+        return $this->belongsToMany(Gaji::class, 'detail_gaji_potongan', 'potongan_id', 'gaji_id', 'karyawan_id');
     }
 }

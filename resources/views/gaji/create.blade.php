@@ -17,7 +17,7 @@
                                 <div class="col-md-6">
                                     <input id="kode_gaji" type="text"
                                         class="form-control @error('kode_gaji') is-invalid @enderror" name="kode_gaji"
-                                        value="GAJI/01/01/....."  required>
+                                        value="GAJI/01/01/....." required>
                                     @error('kode_gaji')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -48,7 +48,8 @@
                                         <option value="">Pilih Karyawan</option>
                                         @foreach ($karyawans as $karyawan)
                                             <option value="{{ $karyawan->id }}">{{ $karyawan->nama_karyawan }}
-                                                ({{ $karyawan->jabatan }}) </option>
+                                                ({{ $karyawan->jabatan }})
+                                            </option>
                                         @endforeach
                                     </select>
                                     @error('karyawan_id')
@@ -59,48 +60,26 @@
                                 </div>
                             </div>
 
+
+
                             <div id="tunjangan-container">
-                                <div class="row mb-3 tunjangan-row">
-                                    <label for="tunjangan_1" class="col-md-4 col-form-label text-md-end">Tunjangan 1</label>
+                                <div class="row mb-3">
+                                    <label for="tunjangan_details" class="col-md-4 col-form-label text-md-end">Detail Tunjangan</label>
                                     <div class="col-md-6">
-                                        <select id="tunjangan_1" class="form-control tunjangan-select"
-                                            name="tunjangan_ids[]" required>
-                                            <option value="" data-jumlah="0">Pilih Tunjangan</option>
-                                            @foreach ($tunjangans as $tunjangan)
-                                                <option value="{{ $tunjangan->id }}"
-                                                    data-jumlah="{{ $tunjangan->jumlah_tunjangan }}">
-                                                    {{ $tunjangan->nama_tunjangan }} | Rp. {{ number_format($tunjangan->jumlah_tunjangan, 2, ',', '.') }} </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button type="button" class="btn btn-success" id="addTunjangan">Tambah
-                                            Tunjangan</button>
+                                        <input id="tunjangan_details" type="text" class="form-control" readonly>
                                     </div>
                                 </div>
                             </div>
 
                             <div id="potongan-container">
-                                <div class="row mb-3 potongan-row">
-                                    <label for="potongan_1" class="col-md-4 col-form-label text-md-end">Potongan 1</label>
+                                <div class="row mb-3">
+                                    <label for="potongan_details" class="col-md-4 col-form-label text-md-end">Detail Potongan</label>
                                     <div class="col-md-6">
-                                        <select id="potongan_1" class="form-control potongan-select" name="potongan_ids[]"
-                                            required>
-                                            <option value="" data-jumlah="0">Pilih Potongan</option>
-                                            @foreach ($potongans as $potongan)
-                                                <option value="{{ $potongan->id }}"
-                                                    data-jumlah="{{ $potongan->jumlah_potongan }}">
-                                                    {{ $potongan->nama_potongan }} | Rp. {{ number_format($potongan->jumlah_potongan, 2, ',', '.') }}</option>
-                                            @endforeach
-                                        </select>
-                                        Potongan tidak ada? silahkan isi terlebih dahulu <a href="/potongan" class="text-warning">di sini</a>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button type="button" class="btn btn-success" id="addPotongan">Tambah
-                                            Potongan</button>
+                                        <input id="potongan_details" type="text" class="form-control" readonly>
                                     </div>
                                 </div>
                             </div>
+
 
                             <div class="row mb-3">
                                 <label for="honor_mengajar_id" class="col-md-4 col-form-label text-md-end">Honor
@@ -113,10 +92,12 @@
                                         @foreach ($honorMengajars as $honorMengajar)
                                             <option value="{{ $honorMengajar->id }}"
                                                 data-jumlah="{{ $honorMengajar->jumlah_mengajar }}">
-                                                {{ $honorMengajar->jam_mengajar }} | Rp. {{ number_format($honorMengajar->jumlah_mengajar, 2, ',', '.') }}</option>
+                                                {{ $honorMengajar->jam_mengajar }} | Rp.
+                                                {{ number_format($honorMengajar->jumlah_mengajar, 2, ',', '.') }}</option>
                                         @endforeach
                                     </select>
-                                    Honor mengajar tidak ada? silahkan isi terlebih dahulu <a href="/honormengajar" class="text-warning">di sini</a>
+                                    Honor mengajar tidak ada? silahkan isi terlebih dahulu <a href="/honormengajar"
+                                        class="text-warning">di sini</a>
                                     @error('honor_mengajar_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -129,7 +110,8 @@
 
 
                             <div class="row mb-3">
-                                <label for="jumlah_absen" class="col-md-4 col-form-label text-md-end">Jumlah Absen/hari</label>
+                                <label for="jumlah_absen" class="col-md-4 col-form-label text-md-end">Jumlah
+                                    Absen/hari</label>
                                 <div class="col-md-6">
                                     <input id="jumlah_absen" type="number"
                                         class="form-control @error('jumlah_absen') is-invalid @enderror" name="jumlah_absen"
@@ -178,120 +160,118 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var tunjanganContainer = document.getElementById('tunjangan-container');
-            var addButtonTunjangan = document.getElementById('addTunjangan');
-            var tunjanganCount = 1;
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var karyawanSelect = document.getElementById('karyawan_id');
+    var tunjanganContainer = document.getElementById('tunjangan-container');
+    var potonganContainer = document.getElementById('potongan-container');
+    var totalGajiDisplay = document.getElementById('total_gaji_display');
+    var totalAbsensiDisplay = document.getElementById('total_absen_display');
+    var totalGajiInput = document.getElementById('total_gaji');
+    var totalAbsensiInput = document.getElementById('total_absen');
+    var jumlahAbsenInput = document.getElementById('jumlah_absen');
+    var honorMengajarSelect = document.getElementById('honor_mengajar_id');
 
-            addButtonTunjangan.addEventListener('click', function() {
-                tunjanganCount++;
-                var newDiv = document.createElement('div');
-                newDiv.className = 'row mb-3 tunjangan-row';
-                newDiv.innerHTML = `
-            <label for="tunjangan_${tunjanganCount}" class="col-md-4 col-form-label text-md-end">Tunjangan ${tunjanganCount}</label>
-            <div class="col-md-6">
-                <select id="tunjangan_${tunjanganCount}" class="form-control tunjangan-select" name="tunjangan_ids[]" required>
-                    <option value="" data-jumlah="0">Pilih Tunjangan</option>
-                    @foreach ($tunjangans as $tunjangan)
-                    <option value="{{ $tunjangan->id }}" data-jumlah="{{ $tunjangan->jumlah_tunjangan }}">{{ $tunjangan->nama_tunjangan }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-danger" onclick="removeTunjangan(this)">Hapus</button>
-            </div>
-        `;
-                tunjanganContainer.appendChild(newDiv);
-                updateTunjanganListeners();
-            });
+    // Function to update tunjangan container with individual forms
+    function updateTunjanganForms(tunjangans) {
+        tunjanganContainer.innerHTML = ''; // Clear previous content
 
-            var potonganContainer = document.getElementById('potongan-container');
-            var addButtonPotongan = document.getElementById('addPotongan');
-            var potonganCount = 1;
+        if (tunjangans.length > 0) {
+            tunjanganContainer.innerHTML = tunjangans.map(function(item, index) {
+                return `
+                    <div class="row mb-3">
+                        <label for="tunjangan_${index + 1}" class="col-md-4 col-form-label text-md-end">Tunjangan ${index + 1}</label>
+                        <div class="col-md-6">
+                            <input id="tunjangan_${index + 1}" type="text" class="form-control" value="${item.nama_tunjangan} | Rp. ${item.jumlah_tunjangan.toLocaleString('id-ID')}" readonly>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        } else {
+            tunjanganContainer.innerHTML = '<div class="row mb-3"><div class="col-md-6 offset-md-4">Tidak ada tunjangan</div></div>';
+        }
+        calculateTotalGaji(); // Recalculate total gaji after updating tunjangan forms
+    }
 
-            addButtonPotongan.addEventListener('click', function() {
-                potonganCount++;
-                var newDiv = document.createElement('div');
-                newDiv.className = 'row mb-3 potongan-row';
-                newDiv.innerHTML = `
-            <label for="potongan_${potonganCount}" class="col-md-4 col-form-label text-md-end">Potongan ${potonganCount}</label>
-            <div class="col-md-6">
-                <select id="potongan_${potonganCount}" class="form-control potongan-select" name="potongan_ids[]" required>
-                    <option value="" data-jumlah="0">Pilih Potongan</option>
-                    @foreach ($potongans as $potongan)
-                    <option value="{{ $potongan->id }}" data-jumlah="{{ $potongan->jumlah_potongan }}">{{ $potongan->nama_potongan }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-danger" onclick="removePotongan(this)">Hapus</button>
-            </div>
-        `;
-                potonganContainer.appendChild(newDiv);
-                updatePotonganListeners();
-            });
+    // Function to update potongan container with individual forms
+    function updatePotonganForms(potongans) {
+        potonganContainer.innerHTML = ''; // Clear previous content
 
-            window.removeTunjangan = function(btn) {
-                btn.closest('.tunjangan-row').remove();
-                calculateTotalGaji();
-            };
+        if (potongans.length > 0) {
+            potonganContainer.innerHTML = potongans.map(function(item, index) {
+                return `
+                    <div class="row mb-3">
+                        <label for="potongan_${index + 1}" class="col-md-4 col-form-label text-md-end">Potongan ${index + 1}</label>
+                        <div class="col-md-6">
+                            <input id="potongan_${index + 1}" type="text" class="form-control" value="${item.nama_potongan} | Rp. ${item.jumlah_potongan.toLocaleString('id-ID')}" readonly>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        } else {
+            potonganContainer.innerHTML = '<div class="row mb-3"><div class="col-md-6 offset-md-4">Tidak ada potongan</div></div>';
+        }
+        calculateTotalGaji(); // Recalculate total gaji after updating potongan forms
+    }
 
-            window.removePotongan = function(btn) {
-                btn.closest('.potongan-row').remove();
-                calculateTotalGaji();
-            };
+    // Function to calculate total gaji
+    function calculateTotalGaji() {
+        var jumlahAbsen = parseInt(jumlahAbsenInput.value) || 0;
+        var honorMengajar = parseInt(honorMengajarSelect.selectedOptions[0].getAttribute('data-jumlah')) || 0;
 
-            function updateTunjanganListeners() {
-                document.querySelectorAll('.tunjangan-select').forEach(function(select) {
-                    select.removeEventListener('change', calculateTotalGaji);
-                    select.addEventListener('change', calculateTotalGaji);
-                });
-            }
-
-            function updatePotonganListeners() {
-                document.querySelectorAll('.potongan-select').forEach(function(select) {
-                    select.removeEventListener('change', calculateTotalGaji);
-                    select.addEventListener('change', calculateTotalGaji);
-                });
-            }
-
-            document.getElementById('jumlah_absen').addEventListener('input', calculateTotalGaji);
-            document.getElementById('honor_mengajar_id').addEventListener('change', calculateTotalGaji);
-
-            function calculateTotalGaji() {
-                var jumlahAbsen = parseInt(document.getElementById('jumlah_absen').value) || 0;
-                var totalAbsen = parseInt(document.getElementById('total_absen').value) || 0;
-                var honorMengajar = parseInt(document.getElementById('honor_mengajar_id').selectedOptions[0]
-                    .getAttribute('data-jumlah')) || 0;
-
-                var totalTunjangan = 0;
-                document.querySelectorAll('.tunjangan-select').forEach(function(select) {
-                    totalTunjangan += parseInt(select.selectedOptions[0].getAttribute('data-jumlah')) || 0;
-                });
-
-                var totalPotongan = 0;
-                document.querySelectorAll('.potongan-select').forEach(function(select) {
-                    totalPotongan += parseInt(select.selectedOptions[0].getAttribute('data-jumlah')) || 0;
-                });
-
-                var totalGaji = (jumlahAbsen * 10000) + honorMengajar + totalTunjangan - totalPotongan;
-                var totalAbsen = jumlahAbsen * 10000;
-
-                // Formatting the numbers
-                var formatter = new Intl.NumberFormat('id-ID', {
-                    style: 'currency',
-                    currency: 'IDR'
-                });
-
-                document.getElementById('total_gaji_display').value = formatter.format(totalGaji);
-                document.getElementById('total_absen_display').value = formatter.format(totalAbsen);
-                document.getElementById('total_gaji').value = totalGaji;
-                document.getElementById('total_absen').value = totalAbsen;
-            }
-
-            updateTunjanganListeners();
-            updatePotonganListeners();
+        // Calculate total tunjangan from form values
+        var totalTunjangan = 0;
+        tunjanganContainer.querySelectorAll('input').forEach(function(input) {
+            var match = input.value.match(/Rp\. ([\d,.]+)/);
+            totalTunjangan += match ? parseFloat(match[1].replace('.', '').replace(',', '.')) : 0;
         });
-    </script>
+
+        // Calculate total potongan from form values
+        var totalPotongan = 0;
+        potonganContainer.querySelectorAll('input').forEach(function(input) {
+            var match = input.value.match(/Rp\. ([\d,.]+)/);
+            totalPotongan += match ? parseFloat(match[1].replace('.', '').replace(',', '.')) : 0;
+        });
+
+        var totalGaji = (jumlahAbsen * 10000) + honorMengajar + totalTunjangan - totalPotongan;
+        var totalAbsensi = jumlahAbsen * 10000;
+
+        // Formatting the numbers
+        var formatter = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR'
+        });
+
+        totalGajiDisplay.value = formatter.format(totalGaji);
+        totalAbsensiDisplay.value = formatter.format(totalAbsensi);
+        totalGajiInput.value = totalGaji;
+        totalAbsensiInput.value = totalAbsensi;
+    }
+
+    // Event listener for karyawan selection change
+    karyawanSelect.addEventListener('change', function() {
+        var karyawanId = this.value;
+
+        if (karyawanId) {
+            fetch(`/api/tunjangan/${karyawanId}`)
+                .then(response => response.json())
+                .then(data => updateTunjanganForms(data))
+                .catch(error => console.error('Error fetching tunjangan:', error));
+
+            fetch(`/api/potongan/${karyawanId}`)
+                .then(response => response.json())
+                .then(data => updatePotonganForms(data))
+                .catch(error => console.error('Error fetching potongan:', error));
+        } else {
+            updateTunjanganForms([]);
+            updatePotonganForms([]);
+        }
+    });
+
+    // Event listeners for input fields
+    jumlahAbsenInput.addEventListener('input', calculateTotalGaji);
+    honorMengajarSelect.addEventListener('change', calculateTotalGaji);
+});
+
+   </script>
 @endsection

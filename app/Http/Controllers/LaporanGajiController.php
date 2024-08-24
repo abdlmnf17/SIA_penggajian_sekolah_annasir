@@ -50,6 +50,6 @@ class LaporanGajiController extends Controller
         $pdf->setPaper('A4', 'landscape'); // Ubah 'A4' sesuai dengan ukuran kertas yang diinginkan, dan 'landscape' untuk orientasi landscape
 
         // Unduh PDF
-        return $pdf->download('laporan_gaji_'.$tanggal_mulai.'_to_'.$tanggal_selesai.'.pdf');
+        return $pdf->stream('laporan_gaji_'.$tanggal_mulai.'_to_'.$tanggal_selesai.'.pdf');
     }
 }

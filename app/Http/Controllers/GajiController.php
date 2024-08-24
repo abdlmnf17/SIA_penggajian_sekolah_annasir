@@ -18,7 +18,7 @@ class GajiController extends Controller
      */
     public function index()
     {
-        $gajis = Gaji::with(['karyawan', 'tunjangan', 'potongan', 'honorMengajar'])->get();
+        $gajis = Gaji::with(['karyawan', 'honorMengajar'])->get();
 
         return view('gaji.index', compact('gajis'));
     }
@@ -76,12 +76,19 @@ class GajiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
-        $gaji = Gaji::with(['karyawan', 'tunjangan', 'potongan', 'honorMengajar'])->findOrFail($id);
+        // Ambil gaji dengan relasi karyawan dan honor mengajar
+        $gaji = Gaji::with(['karyawan', 'honorMengajar'])->findOrFail($id);
 
-        return view('gaji.detail', compact('gaji'));
+        // Ambil tunjangan dan potongan berdasarkan karyawan
+        $tunjangan = $gaji->karyawan->tunjangan;
+        $potongan = $gaji->karyawan->potongan;
+
+        return view('gaji.detail', compact('gaji', 'tunjangan', 'potongan'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -131,5 +138,17 @@ class GajiController extends Controller
         $gaji->delete();
 
         return redirect()->route('gaji.index')->with('success', 'Gaji berhasil dihapus');
+    }
+
+    public function getTunjanganByKaryawan($karyawan_id)
+    {
+        $tunjangans = Tunjangan::where('karyawan_id', $karyawan_id)->get();
+        return response()->json($tunjangans);
+    }
+
+    public function getPotonganByKaryawan($karyawan_id)
+    {
+        $potongans = Potongan::where('karyawan_id', $karyawan_id)->get();
+        return response()->json($potongans);
     }
 }

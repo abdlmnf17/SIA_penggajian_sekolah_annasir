@@ -14,20 +14,20 @@ class Gaji extends Model
         'tanggal_gaji', 'jumlah_absen', 'total_absen', 'total_gaji',
     ];
 
-    public function tunjangan()
-    {
-        return $this->belongsToMany(Tunjangan::class, 'detail_gaji_tunjangan', 'gaji_id', 'tunjangan_id');
-    }
+    // public function tunjangan()
+    // {
+    //     return $this->belongsToMany(Tunjangan::class, 'detail_gaji_tunjangan', 'gaji_id', 'tunjangan_id', 'karyawan_id');
+    // }
 
     public function karyawan()
     {
         return $this->belongsTo(Karyawan::class);
     }
 
-    public function potongan()
-    {
-        return $this->belongsToMany(Potongan::class, 'detail_gaji_potongan', 'gaji_id', 'potongan_id');
-    }
+    // public function potongan()
+    // {
+    //     return $this->belongsToMany(Potongan::class, 'detail_gaji_potongan', 'gaji_id', 'potongan_id', 'karyawan_id');
+    // }
 
     public function honorMengajar()
     {

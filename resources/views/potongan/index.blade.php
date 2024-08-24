@@ -133,6 +133,25 @@
                                     autocomplete="jumlah_potongan">
                             </div>
                         </div>
+
+                        <div class="row mb-3">
+                            <label for="karyawan_id" class="col-md-4 col-form-label text-md-end">Karyawan</label>
+                            <div class="col-md-6">
+                                <select id="karyawan_id" class="form-control @error('karyawan_id') is-invalid @enderror"
+                                    name="karyawan_id" required>
+                                    <option value="">Pilih Karyawan</option>
+                                    @foreach ($karyawans as $karyawan)
+                                        <option value="{{ $karyawan->id }}">{{ $karyawan->nama_karyawan }}
+                                            ({{ $karyawan->jabatan }})</option>
+                                    @endforeach
+                                </select>
+                                @error('karyawan_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>

@@ -96,9 +96,9 @@ td {
                     <th data-label="Nama Karyawan">Nama Karyawan</th>
                     <th data-label="Jabatan">Jabatan</th>
                     <th data-label="Studi">Studi</th>
-                    <th data-label="Honor Mengajar">Honor Mengajar</th>
+                    {{-- <th data-label="Honor Mengajar">Honor Mengajar</th>
                     <th data-label="Tunjangan">Tunjangan</th>
-                    <th data-label="Potongan">Potongan</th>
+                    <th data-label="Potongan">Potongan</th> --}}
                     <th data-label="Total Diterima">Total Diterima</th>
                 </tr>
             </thead>
@@ -110,24 +110,13 @@ td {
                     <td>{{ $item->karyawan->nama_karyawan }}</td>
                     <td>{{ $item->karyawan->jabatan }}</td>
                     <td>{{ $item->karyawan->bidang_studi }}</td>
-                    <td>{{ $item->honorMengajar->jam_mengajar }} Jam | Rp. {{ number_format($item->honorMengajar->jumlah_mengajar, '2',',','.') }}</td>
-                    <td>
-                        @foreach($item->tunjangan as $tunjangans)
-                            {{ $tunjangans->nama_tunjangan }}<br>
-                            Rp. {{ number_format($tunjangans->jumlah_tunjangan, '2',',','.') }}<br>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach($item->potongan as $potongans)
-                            {{ $potongans->nama_potongan }}<br>
-                            Rp. {{ number_format($potongans->jumlah_potongan, 2, ',', '.') }}
-                        @endforeach
+
                     </td>
                     <td>Rp. {{ number_format($item->total_gaji, '2',',','.') }}</td>
                 </tr>
                 @endforeach
                 <tr align="center">
-                    <td colspan="8"><strong>Total Pembayaran Gaji {{ $tanggal_mulai }} sampai {{ $tanggal_selesai }} </strong></td>
+                    <td colspan="5"><strong>Total Pembayaran Gaji {{ $tanggal_mulai }} sampai {{ $tanggal_selesai }} </strong></td>
                     <td><strong>Rp. {{ number_format($totalGajiKeseluruhan, 2, ',', '.') }}</strong></td>
                 </tr>
             </tbody>

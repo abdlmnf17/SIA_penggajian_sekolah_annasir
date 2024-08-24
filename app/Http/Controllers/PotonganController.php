@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Potongan;
 use Illuminate\Http\Request;
+use App\Models\Karyawan;
 
 class PotonganController extends Controller
 {
@@ -16,8 +17,9 @@ class PotonganController extends Controller
     {
 
         $potongan = Potongan::all();
+        $karyawans = Karyawan::all();
 
-        return view('potongan.index', compact('potongan'));
+        return view('potongan.index', compact('potongan','karyawans'));
     }
 
     /**
@@ -38,14 +40,15 @@ class PotonganController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
             'name' => ['required', 'string', 'max:200'],
             'jumlah_potongan' => ['required', 'integer'],
-
+            'karyawan_id' => ['required', 'exists:karyawans,id'],
         ]);
+
 
         Potongan::create([
             'nama_potongan' => $request->name,
+            'karyawan_id' => $request->karyawan_id,
             'jumlah_potongan' => $request->jumlah_potongan,
         ]);
 
