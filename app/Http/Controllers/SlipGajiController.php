@@ -19,6 +19,6 @@ class SlipGajiController extends Controller
 
         $pdf = PDF::loadView('slip-gaji.pdf', compact('gaji'));
 
-        return $pdf->download('slip_gaji_'.$gaji->kode_gaji.'.pdf');
+        return $pdf->stream('slip_gaji_'.$gaji->kode_gaji.'.pdf');
     }
 }

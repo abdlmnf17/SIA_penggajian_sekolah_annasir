@@ -17,6 +17,7 @@ class CreatePotongansTable extends Migration
             $table->id();
             $table->string('nama_potongan');
             $table->integer('jumlah_potongan');
+            $table->foreignId('karyawan_id')->constrained('karyawans')->onDelete('cascade');
             $table->timestamps();
         });
     }

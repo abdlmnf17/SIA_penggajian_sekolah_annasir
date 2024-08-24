@@ -17,6 +17,7 @@ class CreateTunjangansTable extends Migration
             $table->id();
             $table->string('nama_tunjangan', 200);
             $table->integer('jumlah_tunjangan');
+            $table->foreignId('karyawan_id')->constrained('karyawans')->onDelete('cascade');
             $table->timestamps();
         });
     }
