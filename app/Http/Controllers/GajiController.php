@@ -61,11 +61,11 @@ class GajiController extends Controller
         // Buat entri gaji
         $gaji = Gaji::create($request->except('tunjangan_ids', 'potongan_ids'));
 
-        // Lampirkan tunjangan yang dipilih ke entri gaji menggunakan attach
-        $tunjanganIds = collect($request->tunjangan_ids)->unique(); // Hapus duplikat tunjangan jika ada
-        $potonganIds = collect($request->potongan_ids)->unique(); // Hapus duplikat potongan jika ada
-        $gaji->tunjangan()->attach($tunjanganIds);
-        $gaji->potongan()->attach($potonganIds);
+        // // Lampirkan tunjangan yang dipilih ke entri gaji menggunakan attach
+        // $tunjanganIds = collect($request->tunjangan_ids)->unique(); // Hapus duplikat tunjangan jika ada
+        // $potonganIds = collect($request->potongan_ids)->unique(); // Hapus duplikat potongan jika ada
+        // $gaji->tunjangan()->attach($tunjanganIds);
+        // $gaji->potongan()->attach($potonganIds);
 
         return redirect()->route('gaji.index')->with('success', 'Gaji berhasil ditambahkan');
     }
